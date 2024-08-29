@@ -21,13 +21,16 @@ export default {
             required: true,
         },
     },
+    data() {
+        return {
+            chunkSize: window.innerWidth < 1024 ? 3 : 8,
+        };
+    },
     computed: {
         chunkedCategories() {
-            // Função para dividir o array de categorias em chunks de 8
-            let chunkSize = 8;
             let result = [];
-            for (let i = 0; i < this.categories.length; i += chunkSize) {
-                result.push(this.categories.slice(i, i + chunkSize));
+            for (let i = 0; i < this.categories.length; i += this.chunkSize) {
+                result.push(this.categories.slice(i, i + this.chunkSize));
             }
             return result;
         },
@@ -36,6 +39,15 @@ export default {
         goToCategoryDetail(id) {
             this.$router.push(`/categories/${id}`);
         },
+        updateChunkSize() {
+            this.chunkSize = window.innerWidth < 1024 ? 3 : 8;
+        },
+    },
+    mounted() {
+        window.addEventListener('resize', this.updateChunkSize);
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.updateChunkSize);
     },
 };
 </script>

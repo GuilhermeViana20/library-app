@@ -2,7 +2,9 @@
     <nav class="navbar navbar-expand-md border-bottom navbar-dark fixed-top bg-dark">
         <div class="container">
             <div class="me-4">
-                <img height="40" src="@/assets/logo.png" alt="" />
+                <router-link class="nav-link" to="/">
+                    <img height="40" src="@/assets/logo.png" alt="" />
+                </router-link>
             </div>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"

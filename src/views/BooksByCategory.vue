@@ -46,7 +46,7 @@ export default {
         async fetchBooksByCategory() {
             try {
                 const categoryId = this.$route.params.id;
-                const response = await this.$axios.get(`/categories/${categoryId}`);
+                const response = await this.$axios.get(`/categories/${categoryId}/books`);
                 this.books = response.data;
             } catch (error) {
                 console.error('Erro ao buscar livros:', error);
