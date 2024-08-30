@@ -1,73 +1,86 @@
 <template>
     <div>
-        <div class="row g2">
-            <div class="col-md">
-                <div class="form-floating mb-3">
-                    <input v-model="book.title" type="text" class="form-control"
-                        :class="{ 'is-invalid': isInvalid.title }" id="title" placeholder="" required>
-                    <label for="title">Título</label>
-                    <div v-if="isInvalid.title" class="invalid-feedback">
-                        Por favor, insira um título.
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="form-floating mb-3">
-                    <input v-model="book.description" type="text" class="form-control" id="description" placeholder="">
-                    <label for="description">Descrição</label>
-                </div>
-            </div>
+        <div v-if="categories.length === 0" class="d-flex align-items-center justify-content-center">
+            <h5 class="pt-1">Nenhuma categoria encontrada. Por favor, cadastre uma nova categoria:</h5>
+            <button class="btn btn-primary ms-3"
+                data-bs-toggle="collapse"
+                data-bs-target="#category"
+                aria-expanded="false"
+                aria-controls="category"
+            >
+                Cadastrar Categoria
+            </button>
         </div>
-        <div class="row g2">
-            <div class="col-md">
-                <div class="form-floating mb-3">
-                    <input v-model="book.image" type="text" class="form-control"
-                        :class="{ 'is-invalid': isInvalid.image }" id="image" placeholder="" required>
-                    <label for="image">Imagem</label>
-                    <div v-if="isInvalid.image" class="invalid-feedback">
-                        Por favor, insira uma URL de imagem.
+        <div v-else>
+            <div class="row g2">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input v-model="book.title" type="text" class="form-control"
+                            :class="{ 'is-invalid': isInvalid.title }" id="title" placeholder="" required>
+                        <label for="title">Título</label>
+                        <div v-if="isInvalid.title" class="invalid-feedback">
+                            Por favor, insira um título.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input v-model="book.description" type="text" class="form-control" id="description" placeholder="">
+                        <label for="description">Descrição</label>
                     </div>
                 </div>
             </div>
-            <div class="col-md">
-                <div class="mb-3">
-                    <input ref="pdfFile" class="form-control form-control-lg" id="pdf" type="file"
-                        @change="handleFileUpload" :class="{ 'is-invalid': isInvalid.pdf }" required />
-                    <div v-if="isInvalid.pdf" class="invalid-feedback">
-                        Por favor, selecione um arquivo PDF.
+            <div class="row g2">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input v-model="book.image" type="text" class="form-control"
+                            :class="{ 'is-invalid': isInvalid.image }" id="image" placeholder="" required>
+                        <label for="image">Imagem</label>
+                        <div v-if="isInvalid.image" class="invalid-feedback">
+                            Por favor, insira uma URL de imagem.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="mb-3">
+                        <input ref="pdfFile" class="form-control form-control-lg" id="pdf" type="file"
+                            @change="handleFileUpload" :class="{ 'is-invalid': isInvalid.pdf }" required />
+                        <div v-if="isInvalid.pdf" class="invalid-feedback">
+                            Por favor, selecione um arquivo PDF.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mb-3 g2">
-            <div class="col-md">
-                <div class="form-floating mb-3">
-                    <input v-model="book.authors" type="text" class="form-control"
-                        :class="{ 'is-invalid': isInvalid.authors }" id="authors" placeholder="">
-                    <label for="authors">Autores</label>
-                    <div v-if="isInvalid.authors" class="invalid-feedback">
-                        Por favor, insira o(s) autor(es).
+            <div class="row mb-3 g2">
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <input v-model="book.authors" type="text" class="form-control"
+                            :class="{ 'is-invalid': isInvalid.authors }" id="authors" placeholder="">
+                        <label for="authors">Autores</label>
+                        <div v-if="isInvalid.authors" class="invalid-feedback">
+                            Por favor, insira o(s) autor(es).
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="category" v-model="selectedCategory"
+                            :class="{ 'is-invalid': isInvalid.category }">
+                            <option value="" disabled>Sem categoria</option>
+                            <option v-for="category in categories" :key="category.id" :value="category.id">
+                                {{ category.name }}
+                            </option>
+                        </select>
+                        <label for="category">Selecione a categoria</label>
+                        <div v-if="isInvalid.category" class="invalid-feedback">
+                            Por favor, selecione uma categoria.
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md">
-                <div class="form-floating mb-3">
-                    <select class="form-select" id="category" v-model="selectedCategory"
-                        :class="{ 'is-invalid': isInvalid.category }">
-                        <option value="" disabled>Sem categoria</option>
-                        <option v-for="category in categories" :key="category.id" :value="category.id">
-                            {{ category.name }}
-                        </option>
-                    </select>
-                    <label for="category">Selecione a categoria</label>
-                    <div v-if="isInvalid.category" class="invalid-feedback">
-                        Por favor, selecione uma categoria.
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <button @click="validateAndSave" class="btn btn-primary w-100">Salvar</button>
+            <button @click="validateAndSave" class="btn btn-primary w-100">Salvar</button>
+        </div>
     </div>
 </template>
 
@@ -114,8 +127,9 @@ export default {
             try {
                 this.book.category_id = this.selectedCategory;
                 await this.$axios.post('/books', this.book);
-
                 this.$toast.success("Livro salvo com sucesso!");
+
+                this.clearFields();
             } catch (error) {
                 this.$toast.danger("Erro ao salvar o livro!");
             }
@@ -141,12 +155,14 @@ export default {
                 this.isInvalid.pdf = true;
             }
         },
-        showToast() {
-            this.showingToast = true;
-            setTimeout(() => {
-                this.showingToast = false;
-            }, 5000);
-        }
+        clearFields() {
+            this.category.title = '';
+            this.category.description = '';
+            this.category.image = '';
+            this.category.pdf = '';
+            this.category.authors = '';
+            this.category.category_id = '';
+        },
     }
 }
 </script>

@@ -64,6 +64,7 @@ export default {
                 await this.$axios.post('/categories', this.category);
                 this.$toast.success("Categoria salva com sucesso!");
                 
+                this.$emit('category-saved');
                 this.clearFields();
             } catch (error) {
                 this.$toast.danger("Erro ao salvar a categoria!");

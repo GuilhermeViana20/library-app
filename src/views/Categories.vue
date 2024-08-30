@@ -32,7 +32,7 @@
 
         <div v-else>
             <div v-if="categories.length === 0" class="text-center">
-                <h4>Não há livros na base de dados</h4>
+                <h4>Não há categorias na base de dados</h4>
             </div>
 
             <div v-else>

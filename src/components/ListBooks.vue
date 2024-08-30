@@ -12,7 +12,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ book.title }}</h5>
-                                    <p class="card-text">{{ book.description }}</p>
+                                    <p class="card-text">{{ truncateDescription(book.description) }}</p>
                                     <p class="card-text"><small class="text-muted">por {{ book.authors }}</small></p>
                                 </div>
                             </div>
@@ -40,6 +40,13 @@ export default {
         goToBookDetail(id) {
             this.$router.push(`/books/${id}`);
         },
+        truncateDescription(description) {
+            const maxLength = 100;
+            if (description.length > maxLength) {
+                return description.substring(0, maxLength) + '...';
+            }
+            return description;
+        }
     }
 };
 </script>

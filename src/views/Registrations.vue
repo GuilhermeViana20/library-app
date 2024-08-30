@@ -50,14 +50,14 @@
             <div class="col-12">
                 <div class="collapse multi-collapse" id="book" data-bs-parent=".row">
                     <div class="card card-body">
-                        <FormBook />
+                        <FormBook ref="formBook" />
                     </div>
                 </div>
             </div>
             <div class="col-12">
                 <div class="collapse multi-collapse" id="category" data-bs-parent=".row">
                     <div class="card card-body">
-                        <FormCategory />
+                        <FormCategory @category-saved="refreshCategories" />
                     </div>
                 </div>
             </div>
@@ -73,6 +73,11 @@ export default {
     components: {
         FormBook,
         FormCategory
+    },
+    methods: {
+        refreshCategories() {
+            this.$refs.formBook.listCategories();
+        }
     }
 }
 </script>
