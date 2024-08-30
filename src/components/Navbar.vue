@@ -28,6 +28,11 @@
                             Categorias
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/registrations">
+                            Cadastros
+                        </router-link>
+                    </li>
                 </ul>
                 <form @submit.prevent="search" class="d-flex" role="search">
                     <input v-model="query" class="form-control me-2" type="search" placeholder="Digite aqui..."

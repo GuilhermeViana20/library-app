@@ -1,10 +1,9 @@
 <template>
     <div>
-        <div v-for="(chunk, chunkIndex) in chunkedCategories" :key="chunkIndex" class="row">
-            <div class="col" v-for="(category, index) in chunk" :key="index">
+        <div class="row">
+            <div v-for="(category, index) in categories" :key="index" class="category-box">
                 <div @click="goToCategoryDetail(category.id)" class="box text-center mb-4">
-                    <img :src="category.image" alt="Category Image" class="img-fluid rounded-circle" width="70"
-                        height="70">
+                    <img :src="category.image" alt="Category Image" class="img-fluid rounded-circle">
                     <h6 class="fw-normal mt-2">{{ category.name }}</h6>
                 </div>
             </div>
@@ -53,6 +52,17 @@ export default {
 </script>
 
 <style scoped>
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category-box {
+    width: 12.5%;
+    display: flex;
+    justify-content: center;
+}
+
 img {
     height: 70px;
     width: 70px;
@@ -64,6 +74,7 @@ img {
     transition: transform 0.3s ease;
     padding: 10px 0;
     border-radius: 10px;
+    width: 100%;
 }
 
 .box:hover {

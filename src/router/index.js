@@ -7,6 +7,8 @@ import Books from '@/views/Books.vue';
 import BooksByCategory from '@/views/BooksByCategory.vue';
 import Search from '@/views/Search.vue';
 import Categories from '@/views/Categories.vue';
+import ViewBook from '@/views/ViewBook.vue';
+import Registrations from '@/views/Registrations.vue';
 
 Vue.use(Router);
 
@@ -40,6 +42,16 @@ const routes = [
         path: '/categories',
         name: 'Categorias',
         component: Categories
+    },
+    {
+        path: '/books/:id/view',
+        name: 'Visualizador de PDF',
+        component: ViewBook,
+    },
+    {
+        path: '/registrations',
+        name: 'Cadastros',
+        component: Registrations
     }
 ];
 

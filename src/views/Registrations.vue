@@ -24,52 +24,57 @@
             </nav>
         </div>
 
-        <div v-if="loading" class="text-center justify-content-center">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+        <p class="d-inline-flex gap-1">
+            <button
+                class="btn btn-primary"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#book"
+                aria-expanded="false"
+                aria-controls="book"
+            >
+                Cadastrar Livro
+            </button>
+            <button
+                class="btn btn-secondary"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#category"
+                aria-expanded="false"
+                aria-controls="category"
+            >
+                Cadastrar Categoria
+            </button>
+        </p>
+        <div class="row">
+            <div class="col-12">
+                <div class="collapse multi-collapse" id="book" data-bs-parent=".row">
+                    <div class="card card-body">
+                        <FormBook />
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div v-else>
-            <div v-if="books.length === 0" class="text-center">
-                <h4>Não há livros na base de dados</h4>
-            </div>
-    
-            <div v-else>
-                <ListBooks :books="books" />
+            <div class="col-12">
+                <div class="collapse multi-collapse" id="category" data-bs-parent=".row">
+                    <div class="card card-body">
+                        <FormCategory />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import ListBooks from '@/components/ListBooks.vue';
+import FormBook from '@/components/FormBook.vue';
+import FormCategory from '@/components/FormCategory.vue';
 
 export default {
-    name: 'Books',
     components: {
-        ListBooks,
-    },
-    data() {
-        return {
-            books: [],
-            loading: true,
-        }
-    },
-    created() {
-        this.listBooks();
-    },
-    methods: {
-        async listBooks() {
-            try {
-                const response = await this.$axios.get('/books');
-                this.books = response.data;
-                this.loading = false;
-            } catch (error) {
-                console.error('Erro ao buscar livros:', error);
-                this.loading = false;
-            }
-        }
+        FormBook,
+        FormCategory
     }
 }
 </script>
+
+<style></style>

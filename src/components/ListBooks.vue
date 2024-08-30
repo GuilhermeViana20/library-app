@@ -1,7 +1,7 @@
 <template>
     <div class="my-3">
         <div v-for="(books, category) in books" :key="category">
-            <h4 class="mb-4">{{ category }}</h4>
+            <h4 v-if="!hiddenTitle" class="mb-4">{{ category }}</h4>
             <div class="row">
                 <div v-for="(book, index) in books" :key="index" class="col-md-6 mb-4">
                     <div class="card" @click="goToBookDetail(book.id)" style="cursor: pointer;">
@@ -29,9 +29,12 @@ export default {
     name: 'ListBooks',
     props: {
         books: {
-            type: Array,
             required: true,
         },
+        hiddenTitle: {
+            type: Boolean,
+            default: false
+        }
     },
     methods: {
         goToBookDetail(id) {
