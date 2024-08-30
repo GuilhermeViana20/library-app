@@ -61,11 +61,18 @@ export default {
         },
         async saveCategory() {
             try {
-                const response = await this.$axios.post('/categories', this.category);
-                console.log('Category saved successfully:', response.data);
+                await this.$axios.post('/categories', this.category);
+                this.$toast.success("Categoria salva com sucesso!");
+                
+                this.clearFields();
             } catch (error) {
-                console.error('Error saving category:', error);
+                this.$toast.danger("Erro ao salvar a categoria!");
             }
+        },
+        clearFields() {
+            this.category.name = '';
+            this.category.description = '';
+            this.category.image = '';
         },
     }
 }

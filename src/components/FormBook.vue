@@ -113,10 +113,11 @@ export default {
         async saveBook() {
             try {
                 this.book.category_id = this.selectedCategory;
-                const response = await this.$axios.post('/books', this.book);
-                console.log('Book saved successfully:', response.data);
+                await this.$axios.post('/books', this.book);
+
+                this.$toast.success("Livro salvo com sucesso!");
             } catch (error) {
-                console.error('Error saving book:', error);
+                this.$toast.danger("Erro ao salvar o livro!");
             }
         },
         async listCategories() {
