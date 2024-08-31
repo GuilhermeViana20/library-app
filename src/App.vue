@@ -1,24 +1,22 @@
 <template>
-  <div id="app">
-    <header>
-      <Navbar />
-    </header>
-      
-    <main class="py-5 mt-5">
-      <router-view></router-view>
-    </main>
-  </div>
+  <component :is="layoutComponent">
+    <router-view />
+  </component>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
+import DefaultLayout from '@/layouts/Default.vue';
+import AuthLayout from '@/layouts/Auth.vue';
 
 export default {
-  name: 'App',
+  computed: {
+    layoutComponent() {
+      return this.$route.meta.layout === 'auth' ? AuthLayout : DefaultLayout;
+    }
+  },
   components: {
-    Navbar
+    DefaultLayout,
+    AuthLayout
   }
 };
 </script>
-
-<style></style>

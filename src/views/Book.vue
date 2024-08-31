@@ -2,7 +2,7 @@
     <div class="container">
         <div class="mb-5">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
+                <ol class="breadcrumb breadcrumb-chevron p-3 bg-dark rounded-3">
                     <li class="breadcrumb-item">
                         <router-link class="link-body-emphasis" to="/">
                             <svg style="margin-top: -3px;" xmlns="http://www.w3.org/2000/svg"
