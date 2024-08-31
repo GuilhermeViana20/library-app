@@ -9,10 +9,24 @@ import Search from '@/views/Search.vue';
 import Categories from '@/views/Categories.vue';
 import ViewBook from '@/views/ViewBook.vue';
 import Registrations from '@/views/Registrations.vue';
+import Login from '@/views/Auth/Login.vue';
+import Register from '@/views/Auth/Register.vue';
 
 Vue.use(Router);
 
 const routes = [
+    {
+        path: '/login',
+        name: 'Entrar',
+        component: Login,
+        meta: { layout: 'auth' }
+    },
+    {
+        path: '/register',
+        name: 'Cadastrar',
+        component: Register,
+        meta: { layout: 'auth' }
+    },
     {
         path: '/',
         name: 'Home',

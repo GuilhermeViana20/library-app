@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div v-for="(category, index) in categories" :key="index" class="category-box">
-                <div @click="goToCategoryDetail(category.id)" class="box text-center mb-4">
+                <div @click="goToCategoryDetail(category.id)" class="box bg-dark text-center mb-4">
                     <img :src="category.image" alt="Category Image" class="img-fluid rounded-circle">
                     <h6 class="fw-normal mt-2">{{ category.name }}</h6>
                 </div>
