@@ -3,7 +3,7 @@
         <div v-for="(books, category) in books" :key="category">
             <h4 v-if="!hiddenTitle" class="mb-4">{{ category }}</h4>
             <div class="row">
-                <div v-for="(book, index) in books" :key="index" class="col-md-6 mb-4">
+                <div v-for="(book, index) in books" :key="index" class="col-sm-6 col-md-6 mb-4">
                     <div class="card" @click="goToBookDetail(book.id)" style="cursor: pointer;">
                         <div class="row">
                             <div class="col-md-4">

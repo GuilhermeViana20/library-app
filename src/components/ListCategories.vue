@@ -1,9 +1,10 @@
 <template>
     <div>
         <div class="row">
-            <div v-for="(category, index) in categories" :key="index" class="category-box">
+            <div v-for="(category, index) in categories" :key="index" class="col-sm-3 col-md-2">
                 <div @click="goToCategoryDetail(category.id)" class="box bg-dark text-center mb-4">
-                    <img :src="category.image" alt="Category Image" class="img-fluid rounded-circle">
+                    <img :src="category.image ? category.image : 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=No+Image'"
+                        alt="Category Image" class="img-fluid rounded-circle">
                     <h6 class="fw-normal mt-2">{{ category.name }}</h6>
                 </div>
             </div>
@@ -19,34 +20,15 @@ export default {
             type: Array,
             required: true,
         },
-    },
-    data() {
-        return {
-            chunkSize: window.innerWidth < 1024 ? 3 : 8,
-        };
-    },
-    computed: {
-        chunkedCategories() {
-            let result = [];
-            for (let i = 0; i < this.categories.length; i += this.chunkSize) {
-                result.push(this.categories.slice(i, i + this.chunkSize));
-            }
-            return result;
-        },
+        loading: {
+            type: Boolean,
+            default: false
+        }
     },
     methods: {
         goToCategoryDetail(id) {
             this.$router.push(`/categories/${id}`);
         },
-        updateChunkSize() {
-            this.chunkSize = window.innerWidth < 1024 ? 3 : 8;
-        },
-    },
-    mounted() {
-        window.addEventListener('resize', this.updateChunkSize);
-    },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.updateChunkSize);
     },
 };
 </script>

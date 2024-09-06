@@ -28,7 +28,7 @@
                             Categorias
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    <li v-if="this.is_admin" class="nav-item">
                         <router-link class="nav-link" to="/registrations">
                             Cadastros
                         </router-link>
@@ -52,7 +52,19 @@ export default {
     data() {
         return {
             query: "",
+            is_admin: false
         };
+    },
+    mounted() {
+        const userData = localStorage.getItem('user');
+        if (userData) {
+            let user = JSON.parse(atob(userData));
+            this.is_admin = user.is_admin;
+        } else {
+            this.is_admin = null;
+        }
+
+        console.log(this.is_admin);
     },
     methods: {
         search() {

@@ -69,6 +69,7 @@ export default {
 
         localStorage.setItem('access_token', response.data.access_token);
         localStorage.setItem('token_type', response.data.token_type);
+        localStorage.setItem('user', btoa(JSON.stringify(response.data.user)));
 
         this.$router.push({ name: "Início" });
       } catch (error) {

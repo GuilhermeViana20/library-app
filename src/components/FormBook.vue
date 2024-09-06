@@ -131,7 +131,7 @@ export default {
 
                 this.clearFields();
             } catch (error) {
-                this.$toast.danger("Erro ao salvar o livro!");
+                this.$toast.error("Erro ao salvar o livro!");
             }
         },
         async listCategories() {

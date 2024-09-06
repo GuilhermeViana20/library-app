@@ -67,7 +67,7 @@ export default {
                 this.$emit('category-saved');
                 this.clearFields();
             } catch (error) {
-                this.$toast.danger("Erro ao salvar a categoria!");
+                this.$toast.error("Erro ao salvar a categoria!");
             }
         },
         clearFields() {

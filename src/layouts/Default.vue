@@ -18,13 +18,6 @@ export default {
   components: {
     Navbar,
   },
-  mounted() {
-    const access_token = localStorage.getItem("access_token");
-
-    if (!access_token) {
-      this.$router.push({ name: "Entrar" });
-    }
-  },
 };
 </script>
   
